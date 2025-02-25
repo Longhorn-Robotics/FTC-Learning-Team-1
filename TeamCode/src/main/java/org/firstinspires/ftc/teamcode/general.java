@@ -1,9 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 //W
 //import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 //import com.qualcomm.robotcore.eventloop.
 import com.qualcomm.robotcore.hardware.DcMotor;
+
 
 //import java.util.Optional;
 //
@@ -24,7 +27,7 @@ public class general {
     private String blWheelName = "";
     private String brWheelName = "";
     private DcMotor[] motorList = {frontLeftWheel, frontRightWheel, backLeftWheel, backRightWheel};
-    @Override
+
     public void runOpMode() throws InterruptedException {
         frontLeftWheel = hardwareMap.get(DcMotor.class, flWheelName);
         frontRightWheel = hardwareMap.get(DcMotor.class, frWheelName);
