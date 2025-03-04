@@ -38,7 +38,7 @@ public class TeleopRizz extends OpMode {
     //    public float openClawPosition = 0;
 
     RobotHardwareLite robot = new RobotHardwareLite();
-
+//commit
     @Override
     public void init() {
 //        robot.init(hardwareMap); //connects to all hardware components
