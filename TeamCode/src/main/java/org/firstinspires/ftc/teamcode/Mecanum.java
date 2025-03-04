@@ -1,15 +1,15 @@
-//package org.firstinspires.ftc.teamcode;
-//import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-//import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-//
-//import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-//import com.qualcomm.robotcore.hardware.DcMotor;
-//import com.qualcomm.robotcore.hardware.Gamepad;
-//
-//public class Mecanum{
-//    private DcMotor frontRight= null; //java sucks
-//    private DcMotor frontLeft= null; //python lowk better
-//    private DcMotor backRight= null; //we should use py
+////package org.firstinspires.ftc.teamcode;
+////import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+////import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+////
+////import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+////import com.qualcomm.robotcore.hardware.DcMotor;
+////import com.qualcomm.robotcore.hardware.Gamepad;
+////
+////public class Mecanum{
+//    private DcMotor frontRight; //java sucks
+//    private DcMotor frontLeft; //python lowk better
+//    private DcMotor backRight; //we should use py
 //    private DcMotor backLeft= null; //83
 //
 //
@@ -32,7 +32,7 @@
 //        // Wait to press START on controller
 //        WaitForStart();
 //
-//        while (opModeIsActive()) {
+//       while (opModeIsActive()) {
 //            double JOYSTICK_MIN;
 //            double JOYSTICK_MAX;
 //
