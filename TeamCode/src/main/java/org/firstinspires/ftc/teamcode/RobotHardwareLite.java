@@ -3,7 +3,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 
 public class RobotHardwareLite {
     HardwareMap hwMap;
@@ -11,7 +13,8 @@ public class RobotHardwareLite {
     public DcMotor frontLeft;
     public DcMotor backRight;
     public DcMotor frontRight;
-    public DcMotor rail;
+    public Servo rail;
+    public Servo claw;
 
     private ElapsedTime period = new ElapsedTime();
 
@@ -42,6 +45,9 @@ public class RobotHardwareLite {
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        rail = hwMap.get(Servo.class, "rizzy_rail");
+        claw = hwMap.get(Servo.class, "rizzy_claw");
 
 //        // Initialize linear rail motor to run with encoder
 //        rail = hwMap.get(DcMotor.class, "railRAIL");
