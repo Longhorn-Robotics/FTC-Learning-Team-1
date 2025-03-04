@@ -1,8 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 
 public class RobotHardwareLite {
     HardwareMap hwMap;
@@ -10,7 +13,8 @@ public class RobotHardwareLite {
     public DcMotor frontLeft;
     public DcMotor backRight;
     public DcMotor frontRight;
-    public DcMotor rail;
+    public Servo rail;
+    public Servo claw;
 
     private ElapsedTime period = new ElapsedTime();
 
@@ -21,13 +25,13 @@ public class RobotHardwareLite {
         hwMap = ahwMap;
 
         // Initialize drive motors
-        frontLeft = hwMap.get(DcMotor.class, "motorFL");
-        backLeft = hwMap.get(DcMotor.class, "motorBL");
-        frontRight = hwMap.get(DcMotor.class, "motorFR");
-        backRight = hwMap.get(DcMotor.class, "motorBR");
+        frontLeft = hwMap.get(DcMotor.class, "left_front_drive");
+        backLeft = hwMap.get(DcMotor.class, "left_back_drive");
+        frontRight = hwMap.get(DcMotor.class, "right_front_drive");
+        backRight = hwMap.get(DcMotor.class, "right_back_drive");
         frontLeft.setDirection(DcMotor.Direction.FORWARD);
         backLeft.setDirection(DcMotor.Direction.FORWARD);
-        frontRight.setDirection(DcMotor.Direction.FORWARD);
+        frontRight.setDirection(DcMotor.Direction.REVERSE);
         backRight.setDirection(DcMotor.Direction.FORWARD);
         frontLeft.setPower(0);
         backLeft.setPower(0);
@@ -42,14 +46,17 @@ public class RobotHardwareLite {
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        // Initialize linear rail motor to run with encoder
-        rail = hwMap.get(DcMotor.class, "railRAIL");
-        rail.setDirection(DcMotor.Direction.REVERSE);
-        rail.setTargetPosition(0);
-        rail.setPower(0.5);
-        rail.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rail.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rail.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rail.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rail = hwMap.get(Servo.class, "rizzy_rail");
+        claw = hwMap.get(Servo.class, "rizzy_claw");
+
+//        // Initialize linear rail motor to run with encoder
+//        rail = hwMap.get(DcMotor.class, "railRAIL");
+//        rail.setDirection(DcMotor.Direction.REVERSE);
+//        rail.setTargetPosition(0);
+//        rail.setPower(0.5);
+//        rail.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        rail.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        rail.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        rail.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 }
