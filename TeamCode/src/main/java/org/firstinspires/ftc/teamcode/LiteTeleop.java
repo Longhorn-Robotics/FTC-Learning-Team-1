@@ -59,6 +59,20 @@ public class LiteTeleop extends OpMode {
 
         railPos += (gamepad1.right_trigger - gamepad1.left_trigger) * 0.5f;
 
+        if (gamepad1.right_trigger > 0.1f) {
+            railPos += 0.1;
+        } else if (gamepad1.left_trigger > 0.1f) {
+            railPos -= 0.1;
+        }
+
+        if (railPos <= 0) {
+            railPos = 0;
+        }
+
+        if (railPos >= 1) {
+            railPos = 1;
+        }
+
         //if (railPos < RAIL_MIN) railPos = RAIL_MIN;
         //else if (railPos > RAIL_MAX) railPos = RAIL_MAX;
 
