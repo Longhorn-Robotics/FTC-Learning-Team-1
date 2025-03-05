@@ -53,9 +53,9 @@ public class LiteTeleop extends OpMode {
         robot.frontRight.setPower(0.6*(-final_throttle - final_strafe - final_yaw));
         robot.backRight.setPower(-final_throttle + final_strafe - final_yaw);
 
-        telemetry.addLine(String.format("Right Trigger: %6.2f", gamepad1.right_trigger));
-        telemetry.addLine(String.format("Target Position: %6.2f", railPos));
-        telemetry.addLine(String.format("Rail Position: %d", robot.rail.getPosition()));
+//        telemetry.addLine(String.format("Right Trigger: %6.2f", gamepad1.right_trigger));
+//        telemetry.addLine(String.format("Target Position: %6.2f", railPos));
+//        telemetry.addLine(String.format("Rail Position: %d", robot.rail.getPosition()));
 
         railPos += (gamepad1.right_trigger - gamepad1.left_trigger) * 0.5f;
 
@@ -69,8 +69,8 @@ public class LiteTeleop extends OpMode {
             railPos = 0;
         }
 
-        if (railPos >= 1) {
-            railPos = 1;
+        if (railPos >= 0.9) {
+            railPos = 0.9;
         }
 
         //if (railPos < RAIL_MIN) railPos = RAIL_MIN;
