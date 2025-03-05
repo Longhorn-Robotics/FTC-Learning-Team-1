@@ -57,19 +57,20 @@ public class LiteTeleop extends OpMode {
 //        telemetry.addLine(String.format("Target Position: %6.2f", railPos));
 //        telemetry.addLine(String.format("Rail Position: %d", robot.rail.getPosition()));
 
-        railPos += (gamepad1.right_trigger - gamepad1.left_trigger) * 0.5f;
-
+        //railPos += (gamepad1.right_trigger - gamepad1.left_trigger) * 0.5f;
+        //test appears not to work, because the servo is too slow to move the rail up. it affects the execution
+        //of the loop and renders the adjustments made halfway through
         if (gamepad1.right_trigger > 0.1f) {
-            railPos += 0.1;
+            railPos += 0.5;
         } else if (gamepad1.left_trigger > 0.1f) {
-            railPos -= 0.1;
+            railPos -= 0.5;
         }
 
-        if (railPos <= 0) {
+        if (railPos < 0) {
             railPos = 0;
         }
 
-        if (railPos >= 0.9) {
+        if (railPos > 0.9) {
             railPos = 0.9;
         }
 
