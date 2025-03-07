@@ -48,8 +48,12 @@ public class RobotHardwareLite {
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         rail = hwMap.get(Servo.class, "rail");
+        //set defaults
+        rail.setPosition(0);
         arm = hwMap.get(Servo.class, "arm");
-        //claw = hwMap.get(Servo.class, "claw");
+        arm.setPosition(0.25);
+        claw = hwMap.get(Servo.class, "claw");
+        claw.setPosition(0.25);
 
 //        // Initialize linear rail motor to run with encoder
 //        rail = hwMap.get(DcMotor.class, "railRAIL");
