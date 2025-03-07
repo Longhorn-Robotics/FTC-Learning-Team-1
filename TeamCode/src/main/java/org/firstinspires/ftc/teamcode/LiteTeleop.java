@@ -13,6 +13,7 @@ public class LiteTeleop extends OpMode {
     final double joystickBaseSpeed = 1f;
     RobotHardwareLite robot = new RobotHardwareLite();
     double railPos = 0.0f;
+    double armPos = 0.0f;
 
     // Code to run ONCE when the driver hits INIT
     @Override
@@ -20,17 +21,6 @@ public class LiteTeleop extends OpMode {
         robot.init(hardwareMap);
         // Send telemetry message to signify robot waiting
         telemetry.addData("Say", "Hello Advay");
-    }
-
-    // Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
-    @Override
-    public void init_loop() {
-    }
-
-    // Code to run ONCE when the driver hits PLAY
-    @Override
-    public void start() {
-
     }
 
     // Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
@@ -66,6 +56,12 @@ public class LiteTeleop extends OpMode {
             railPos -= 0.5;
         }
 
+        if (gamepad1.right_bumper) {
+            armPos += 0.05;
+        } else if (gamepad1.left_bumper) {
+            armPos -= 0.05;
+        }
+
         if (railPos < 0) {
             railPos = 0;
         }
@@ -74,10 +70,19 @@ public class LiteTeleop extends OpMode {
             railPos = 0.9;
         }
 
+        if (armPos < 0) {
+            armPos = 0;
+        }
+
+        if (armPos > 0.2) {
+            armPos = 0.2;
+        }
+
         //if (railPos < RAIL_MIN) railPos = RAIL_MIN;
         //else if (railPos > RAIL_MAX) railPos = RAIL_MAX;
 
         robot.rail.setPosition(railPos);
+        robot.arm.setPosition(armPos);
 
         telemetry.update();
     }
