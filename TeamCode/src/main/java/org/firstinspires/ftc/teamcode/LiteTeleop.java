@@ -70,12 +70,12 @@ public class LiteTeleop extends OpMode {
             railPos = 0.9;
         }
 
-        if (armPos < 0) {
-            armPos = 0;
+        if (armPos < 0.25) {
+            armPos = 0.25;
         }
 
-        if (armPos > 0.2) {
-            armPos = 0.2;
+        if (armPos > 0.45) {
+            armPos = 0.45;
         }
 
         //if (railPos < RAIL_MIN) railPos = RAIL_MIN;
