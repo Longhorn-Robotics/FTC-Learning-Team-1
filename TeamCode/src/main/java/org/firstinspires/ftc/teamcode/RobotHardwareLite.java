@@ -53,7 +53,7 @@ public class RobotHardwareLite {
         arm = hwMap.get(Servo.class, "arm");
         arm.setPosition(0.25);
         claw = hwMap.get(Servo.class, "claw");
-        claw.setPosition(0.25);
+        claw.setPosition(0.125);
 
 //        // Initialize linear rail motor to run with encoder
 //        rail = hwMap.get(DcMotor.class, "railRAIL");

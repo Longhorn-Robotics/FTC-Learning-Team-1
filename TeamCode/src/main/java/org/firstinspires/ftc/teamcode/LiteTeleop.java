@@ -15,7 +15,7 @@ public class LiteTeleop extends OpMode {
     double railPos = 0.0f;
     double armPos = 0.0f;
 
-    boolean clawOpen = false;
+    boolean clawOpen = true; //true = OPEN; false = CLOSED
 
     // Code to run ONCE when the driver hits INIT
     @Override
@@ -91,9 +91,9 @@ public class LiteTeleop extends OpMode {
         //if (railPos < RAIL_MIN) railPos = RAIL_MIN;
         //else if (railPos > RAIL_MAX) railPos = RAIL_MAX;
         if (clawOpen) {
-            robot.claw.setPosition(0.125);
+            robot.claw.setPosition(0.125); //45 deg
         } else {
-            robot.claw.setPosition(0.25);
+            robot.claw.setPosition(0.25); //90 deg
         }
         robot.rail.setPosition(railPos);
         robot.arm.setPosition(armPos);
