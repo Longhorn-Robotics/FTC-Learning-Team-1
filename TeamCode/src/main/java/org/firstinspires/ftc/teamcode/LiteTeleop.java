@@ -21,6 +21,8 @@ public class LiteTeleop extends OpMode {
     @Override
     public void init() {
         robot.init(hardwareMap);
+        robot.arm.setPosition(0.25); //set away from default of zero so it doesnt hit the table
+
         // Send telemetry message to signify robot waiting
         telemetry.addData("Say", "Hello Advay");
     }
@@ -40,9 +42,9 @@ public class LiteTeleop extends OpMode {
         final_strafe += (gamepad1.left_stick_x * joystickMultiplier);
         final_yaw += (gamepad1.right_stick_x * joystickMultiplier);
 
-        robot.frontLeft.setPower(0.6*(final_throttle - final_strafe - final_yaw));
+        robot.frontLeft.setPower(0.6 * (final_throttle - final_strafe - final_yaw));
         robot.backLeft.setPower(final_throttle + final_strafe - final_yaw);
-        robot.frontRight.setPower(0.6*(-final_throttle - final_strafe - final_yaw));
+        robot.frontRight.setPower(0.6 * (-final_throttle - final_strafe - final_yaw));
         robot.backRight.setPower(-final_throttle + final_strafe - final_yaw);
 
 //        telemetry.addLine(String.format("Right Trigger: %6.2f", gamepad1.right_trigger));
@@ -81,11 +83,12 @@ public class LiteTeleop extends OpMode {
         }
 
         if (gamepad1.y) {
-            if (clawOpen) {
+            telemetry.addData("Say", "Y-button worked");
+      //      if (clawOpen) {
                 clawOpen = false;
-            } else {
-                clawOpen = true;
-            }
+       //     } else {
+      //          clawOpen = true;
+       //     }
         }
 
         //if (railPos < RAIL_MIN) railPos = RAIL_MIN;
@@ -102,7 +105,4 @@ public class LiteTeleop extends OpMode {
     }
 
     // Code to run ONCE after the driver hits STOP
-    @Override
-    public void stop() {
-    }
 }
