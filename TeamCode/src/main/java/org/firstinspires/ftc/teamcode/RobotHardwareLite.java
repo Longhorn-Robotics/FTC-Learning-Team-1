@@ -14,6 +14,7 @@ public class RobotHardwareLite {
     public DcMotor backRight;
     public DcMotor frontRight;
     public Servo rail;
+    public Servo arm;
     public Servo claw;
 
     private ElapsedTime period = new ElapsedTime();
@@ -47,7 +48,12 @@ public class RobotHardwareLite {
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         rail = hwMap.get(Servo.class, "rail");
-        //claw = hwMap.get(Servo.class, "claw");
+        //set defaults
+        rail.setPosition(0);
+        arm = hwMap.get(Servo.class, "arm");
+        arm.setPosition(0.25);
+        claw = hwMap.get(Servo.class, "claw");
+        claw.setPosition(0.125);
 
 //        // Initialize linear rail motor to run with encoder
 //        rail = hwMap.get(DcMotor.class, "railRAIL");
