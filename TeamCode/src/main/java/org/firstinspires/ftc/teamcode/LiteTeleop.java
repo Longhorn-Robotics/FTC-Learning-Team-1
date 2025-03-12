@@ -1,17 +1,31 @@
 package org.firstinspires.ftc.teamcode;
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
 import org.firstinspires.ftc.teamcode.RobotHardwareLite;
+
+// From now on:
+// Comment code correctly
+// Follow variable naming conventions
+// Add professional telemetry statements
+// Organize things
+// Use good commit names
+// - Arman
 
 @TeleOp(name = "LiteTeleop", group = "Pushbot")
 public class LiteTeleop extends OpMode {
+    RobotHardwareLite robot = new RobotHardwareLite();
+    
     static double RAIL_MIN = 0.0f;
     static double RAIL_MAX = 3000.0f;
 
+    static double ARM_MIN = 0.0f;
+    static double ARM_MAX = 0.8f;
+
+    static double CLAW_OPEN = 0.125f;
+    static double CLAW_CLOSED = 0.25f;
+
     final double joystickBaseSpeed = 1f;
-    RobotHardwareLite robot = new RobotHardwareLite();
+    
     double railPos = 0.0f;
     double armPos = 0.0f;
 
@@ -24,18 +38,17 @@ public class LiteTeleop extends OpMode {
         robot.arm.setPosition(0.25); //set away from default of zero so it doesnt hit the table
 
         // Send telemetry message to signify robot waiting
-        telemetry.addData("Say", "Hello Advay");
+        telemetry.addData("DEBUG: ", "Robot Initialized");
     }
 
     // Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
     @Override
     public void loop() {
-        // Final Robot Instructions
+        // WHEELS
         double final_throttle = 0.0f;
         double final_strafe = 0.0f;
         double final_yaw = 0.0f;
 
-//        double joystickMultiplier = joystickBaseSpeed + (1.0f - gamepad1.right_trigger);
         double joystickMultiplier = joystickBaseSpeed;
 
         final_throttle += (gamepad1.left_stick_y * joystickMultiplier);
@@ -47,62 +60,57 @@ public class LiteTeleop extends OpMode {
         robot.frontRight.setPower(0.6 * (-final_throttle - final_strafe - final_yaw));
         robot.backRight.setPower(-final_throttle + final_strafe - final_yaw);
 
-//        telemetry.addLine(String.format("Right Trigger: %6.2f", gamepad1.right_trigger));
-//        telemetry.addLine(String.format("Target Position: %6.2f", railPos));
-//        telemetry.addLine(String.format("Rail Position: %d", robot.rail.getPosition()));
-
-        //railPos += (gamepad1.right_trigger - gamepad1.left_trigger) * 0.5f;
-        //test appears not to work, because the servo is too slow to move the rail up. it affects the execution
-        //of the loop and renders the adjustments made halfway through
+        // LINEAR RAIL
         if (gamepad1.right_trigger > 0.1f) {
             railPos += 0.5;
         } else if (gamepad1.left_trigger > 0.1f) {
             railPos -= 0.5;
         }
 
+        if (railPos < RAIL_MIN) {
+            railPos = RAIL_MIN;
+        }
+
+        if (railPos > RAIL_MAX) {
+            railPos = RAIL_MAX;
+        }
+
+        // ARM
         if (gamepad1.right_bumper) {
             armPos += 0.05;
         } else if (gamepad1.left_bumper) {
             armPos -= 0.05;
         }
 
-        if (railPos < 0) {
-            railPos = 0;
+        if (armPos < ARM_MIN) {
+            armPos = ARM_MIN;
         }
 
-        if (railPos > 0.9) {
-            railPos = 0.9;
+        if (armPos > ARM_MAX) {
+            armPos = ARM_MAX;
         }
 
-        if (armPos < 0) {
-            armPos = 0;
-        }
-
-        if (armPos > 0.8) {
-            armPos = 0.8;
-        }
-
+        // CLAW
         if (gamepad1.y) {
-            telemetry.addData("Say", "Y-button worked");
-      //      if (clawOpen) {
-                clawOpen = false;
-       //     } else {
-      //          clawOpen = true;
-       //     }
+            telemetry.addData("Debug: ", "Y-Button Detected");
+            clawOpen = true;
         }
 
-        //if (railPos < RAIL_MIN) railPos = RAIL_MIN;
-        //else if (railPos > RAIL_MAX) railPos = RAIL_MAX;
-        if (clawOpen) {
-            robot.claw.setPosition(0.125); //45 deg
-        } else {
-            robot.claw.setPosition(0.25); //90 deg
+        if (gamepad1.a) {
+            telemetry.addData("Debug: ", "A-button Detected");
+            clawOpen = false;
         }
+
+        if (clawOpen) {
+            robot.claw.setPosition(CLAW_OPEN); //45 deg
+        } else {
+            robot.claw.setPosition(CLAW_CLOSED); //90 deg
+        }
+
+        // UPDATE POSITIONS
         robot.rail.setPosition(railPos);
         robot.arm.setPosition(armPos);
 
         telemetry.update();
     }
-
-    // Code to run ONCE after the driver hits STOP
 }
