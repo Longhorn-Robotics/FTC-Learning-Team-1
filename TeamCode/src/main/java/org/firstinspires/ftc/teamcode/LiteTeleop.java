@@ -6,7 +6,6 @@ import org.firstinspires.ftc.teamcode.RobotHardwareLite;
 // From now on:
 // Comment code correctly
 // Follow variable naming conventions
-// Add professional telemetry statements
 // Organize things
 // Use good commit names
 // - Arman
@@ -38,7 +37,7 @@ public class LiteTeleop extends OpMode {
         robot.arm.setPosition(0.25); //set away from default of zero so it doesnt hit the table
 
         // Send telemetry message to signify robot waiting
-        telemetry.addData("DEBUG: ", "Robot Initialized");
+        telemetry.addData("Say:", "Hello Advay");
     }
 
     // Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
