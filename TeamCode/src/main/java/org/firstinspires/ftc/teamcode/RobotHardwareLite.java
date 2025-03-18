@@ -30,6 +30,8 @@ public class RobotHardwareLite {
         backLeft = hwMap.get(DcMotor.class, "left_back_drive");
         frontRight = hwMap.get(DcMotor.class, "right_front_drive");
         backRight = hwMap.get(DcMotor.class, "right_back_drive");
+        rail = hwMap.get(DcMotor.class, "rail");
+        
         frontLeft.setDirection(DcMotor.Direction.FORWARD);
         backLeft.setDirection(DcMotor.Direction.FORWARD);
         frontRight.setDirection(DcMotor.Direction.REVERSE);
@@ -55,14 +57,16 @@ public class RobotHardwareLite {
         claw = hwMap.get(Servo.class, "claw");
         claw.setPosition(0.125);
 
-//        // Initialize linear rail motor to run with encoder
-//        rail = hwMap.get(DcMotor.class, "railRAIL");
-//        rail.setDirection(DcMotor.Direction.REVERSE);
-//        rail.setTargetPosition(0);
-//        rail.setPower(0.5);
-//        rail.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        rail.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        rail.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//        rail.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        // linear rail motor to run with encoder setup
+        //we can modify it to be able to controllable by holding down a button later
+//       
+        rail.setDirection(DcMotor.Direction.REVERSE);
+        rail.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+       // rail.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rail.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+       // rail.setTargetPosition(1000); //change this value and implement in opmode
+        rail.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rail.setPower(0.5);
+        
     }
 }
