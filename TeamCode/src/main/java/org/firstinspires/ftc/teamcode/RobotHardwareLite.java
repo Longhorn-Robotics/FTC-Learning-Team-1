@@ -66,7 +66,7 @@ public class RobotHardwareLite {
         rail.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
        // rail.setTargetPosition(1000); //change this value and implement in opmode
         rail.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rail.setPower(0.5);
+     //   rail.setPower(0.5);
         
     }
 }
