@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+//2786.2 is full rotation for motor
 
 public class RobotHardwareLite {
     HardwareMap hwMap;
@@ -13,7 +14,7 @@ public class RobotHardwareLite {
     public DcMotor frontLeft;
     public DcMotor backRight;
     public DcMotor frontRight;
-    public Servo rail;
+    public DcMotor rail;
     public Servo arm;
     public Servo claw;
 
@@ -49,9 +50,8 @@ public class RobotHardwareLite {
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        rail = hwMap.get(Servo.class, "rail");
+        rail = hwMap.get(DcMotor.class, "rail");
         //set defaults
-        rail.setPosition(0);
         arm = hwMap.get(Servo.class, "arm");
         arm.setPosition(0.25);
         claw = hwMap.get(Servo.class, "claw");
@@ -60,12 +60,11 @@ public class RobotHardwareLite {
 //        // linear rail motor to run with encoder setup
         //we can modify it to be able to controllable by holding down a button later
 //       
-        rail.setDirection(DcMotor.Direction.REVERSE);
-        rail.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-       // rail.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rail.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-       // rail.setTargetPosition(1000); //change this value and implement in opmode
-        rail.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        rail.setDirection(DcMotor.Direction.REVERSE);
+//        rail.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        rail.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        rail.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        rail.setMode(DcMotor.RunMode.RUN_TO_POSITION);
   //      rail.setPower(0.5);
         
     }
