@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
 import org.firstinspires.ftc.teamcode.RobotHardwareLite;
 
 // From now on:
@@ -27,6 +29,8 @@ public class LiteTeleop extends OpMode {
     
     double railPos = 0.0f;
     double armPos = 0.0f;
+    double targetPos;
+    double fullRot = 2786.2;
 
     boolean clawOpen = true; //true = OPEN; false = CLOSED
 
@@ -61,9 +65,9 @@ public class LiteTeleop extends OpMode {
 
         // LINEAR RAIL
         if (gamepad1.right_trigger > 0.1f) {
-            railPos += 0.5;
+            encoder(1, 0.5, true);
         } else if (gamepad1.left_trigger > 0.1f) {
-            railPos -= 0.5;
+            encoder(1,0.5, false);
         }
 
         if (railPos < RAIL_MIN) {
@@ -106,10 +110,24 @@ public class LiteTeleop extends OpMode {
             robot.claw.setPosition(CLAW_CLOSED); //90 deg
         }
 
-        // UPDATE POSITIONS
-        robot.rail.setPosition(railPos);
+
+        // UPDATE POSITION
         robot.arm.setPosition(armPos);
 
         telemetry.update();
+    }
+    //true = forward; false = reverse
+    private void encoder(double decimal, double power, boolean direction) {
+        telemetry.addData("Event", "encoder() called");
+        //robot.rail.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        targetPos = fullRot*decimal;
+        robot.rail.setTargetPosition((int)targetPos);
+        robot.rail.setPower(power);
+        robot.rail.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        if (direction) {
+            robot.rail.setDirection(DcMotor.Direction.FORWARD);
+        } else {
+            robot.rail.setDirection(DcMotor.Direction.REVERSE);
+        }
     }
 }
