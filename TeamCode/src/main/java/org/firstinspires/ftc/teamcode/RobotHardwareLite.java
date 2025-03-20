@@ -53,7 +53,7 @@ public class RobotHardwareLite {
         rail = hwMap.get(DcMotor.class, "rail");
         //set defaults
         arm = hwMap.get(Servo.class, "arm");
-        arm.setPosition(0.25);
+        //arm.setPosition(0);
         claw = hwMap.get(Servo.class, "claw");
         claw.setPosition(0.125);
 
