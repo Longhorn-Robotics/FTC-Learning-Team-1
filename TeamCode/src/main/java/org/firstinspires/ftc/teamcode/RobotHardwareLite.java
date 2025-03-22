@@ -53,9 +53,9 @@ public class RobotHardwareLite {
         rail = hwMap.get(DcMotor.class, "rail");
         //set defaults
         arm = hwMap.get(Servo.class, "arm");
-        //arm.setPosition(0);
+    //    arm.setPosition(0.7);
         claw = hwMap.get(Servo.class, "claw");
-        claw.setPosition(0.125);
+    //    claw.setPosition(0.125);
 
 //        // linear rail motor to run with encoder setup
         //we can modify it to be able to controllable by holding down a button later
