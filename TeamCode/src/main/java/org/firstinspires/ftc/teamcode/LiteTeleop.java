@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.RobotHardwareLite;
 // Comment code correctly
 // Follow variable naming conventions
 // Organize things
-// Use good commit names
+// Use better commit names
 // - Arman
 
 @TeleOp(name = "LiteTeleop", group = "Pushbot")
