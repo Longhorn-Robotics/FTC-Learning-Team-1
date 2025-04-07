@@ -40,7 +40,8 @@ public class LiteTeleop extends OpMode {
         robot.arm.setPosition(armPos); //set away from default of zero so it doesnt hit the table
 
         // Send telemetry message to signify robot waiting
-        telemetry.addData("Say:", "Hello SIGMA");
+        telemetry.addData("Say:", "Hello FRANCISCO");
+        telemetry.update();
     }
 
     // Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
