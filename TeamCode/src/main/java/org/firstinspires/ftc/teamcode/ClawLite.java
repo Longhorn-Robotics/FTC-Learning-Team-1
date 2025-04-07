@@ -13,7 +13,7 @@ public class ClawLite extends OpMode {
         robot.claw.setPosition(0.55);
         telemetry.addData("Say:", "CLAW");
         telemetry.update(); //need in each loop
-
+//sdf
     }
 
     @Override
