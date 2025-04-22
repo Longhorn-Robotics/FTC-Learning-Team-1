@@ -57,7 +57,7 @@ public class LiteTeleop extends OpMode {
         final_throttle += (gamepad1.left_stick_y * joystickMultiplier);
         final_strafe += (gamepad1.left_stick_x * joystickMultiplier);
         final_yaw += (gamepad1.right_stick_x * joystickMultiplier);
-//chamelon
+
         robot.frontLeft.setPower(0.6 * (final_throttle - final_strafe - final_yaw));
         robot.backLeft.setPower(final_throttle + final_strafe - final_yaw);
         robot.frontRight.setPower(0.6 * (-final_throttle - final_strafe - final_yaw));
