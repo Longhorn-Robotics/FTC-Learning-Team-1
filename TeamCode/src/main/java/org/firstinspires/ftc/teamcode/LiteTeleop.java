@@ -22,8 +22,8 @@ public class LiteTeleop extends OpMode {
     static double ARM_MIN = 0.35f;
     static double ARM_MAX = 0.875f;
 
-    static double CLAW_OPEN = 0.125f;
-    static double CLAW_CLOSED = 0.25f;
+    static double CLAW_OPEN = 0.5f;
+    static double CLAW_CLOSED = 0.8f;
 
     final double joystickBaseSpeed = 1f;
     
@@ -31,7 +31,9 @@ public class LiteTeleop extends OpMode {
     double armPos = 0.875f;
     double targetPos;
     double fullRot = 6900; //1988 use   divide by 4.5
-    boolean clawOpen = true; //true = OPEN; false = CLOSED
+    boolean clawOpen = false; //true = OPEN; false = CLOSED
+    boolean railUp = false;
+    boolean armUp = true;
 
     // Code to run ONCE when the driver hits INIT
     @Override
@@ -64,9 +66,17 @@ public class LiteTeleop extends OpMode {
         robot.backRight.setPower(-final_throttle + final_strafe - final_yaw);
 
         // LINEAR RAIL
-        if (gamepad1.right_trigger > 0.1f) {
+        if (gamepad1.y) {
+            if (!railUp) {
+                railUp = true;
+            } else {
+                railUp = false;
+            }
+        }
+
+        if (railUp) {
             encoder(1, 0.3, true);
-        } else if (gamepad1.left_trigger > 0.1f) {
+        } else {
             encoder(0,0.39, false);
         }
 
@@ -79,9 +89,9 @@ public class LiteTeleop extends OpMode {
         }
 
         // ARM
-        if (gamepad1.right_bumper) {
+        if (gamepad1.left_bumper) {
             armPos += 0.05;
-        } else if (gamepad1.left_bumper) {
+        } else if (gamepad1.right_bumper) {
             armPos -= 0.05;
         }
 
@@ -94,7 +104,7 @@ public class LiteTeleop extends OpMode {
         }
 
         // CLAW
-        if (gamepad1.y) {
+        if (gamepad1.x) {
             telemetry.addData("Debug: ", "Y-Button Detected");
             clawOpen = true;
         }

@@ -10,7 +10,7 @@ public class ClawLite extends OpMode {
 
     @Override
     public void init() {
-        robot.claw.setPosition(0.55f);
+        robot.claw.setPosition(0.55);
         telemetry.addData("Say:", "CLAW");
         telemetry.update(); //need in each loop
 //sdf
@@ -19,10 +19,10 @@ public class ClawLite extends OpMode {
     @Override
     public void loop() {
         if (gamepad1.right_bumper) {
-            robot.claw.setPosition(0.3f);
+            robot.claw.setPosition(0.3);
             telemetry.addData("Debug:","Right bumper");
         } else if (gamepad1.left_bumper) { //driver 1
-            robot.claw.setPosition(0.8f);
+            robot.claw.setPosition(0.8);
             telemetry.addData("Debug:","Left bumper");
         }
         telemetry.update();
