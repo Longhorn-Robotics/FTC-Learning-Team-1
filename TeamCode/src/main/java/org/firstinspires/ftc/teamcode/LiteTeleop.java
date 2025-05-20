@@ -30,7 +30,7 @@ public class LiteTeleop extends OpMode {
     double railPos = 0.0f;
     double armPos = 0.875f;
     double targetPos;
-    double fullRot = 6900; //1988 use   divide by 4.5
+    double fullRot = 5000; //1988 use   divide by 4.5
     boolean clawOpen = false; //true = OPEN; false = CLOSED
     boolean railUp = false;
     boolean armUp = true;
@@ -90,10 +90,15 @@ public class LiteTeleop extends OpMode {
 
         // ARM
         if (gamepad1.left_bumper) {
-            armPos += 0.05;
+            armPos += 0.022;
+            telemetry.addData("Left", "Bumper");
+
         } else if (gamepad1.right_bumper) {
-            armPos -= 0.05;
+            armPos -= 0.022;
+            telemetry.addData("Right", "Bumper");
+
         }
+        telemetry.update();
 
        if (armPos < ARM_MIN) {
             armPos = ARM_MIN;
@@ -105,7 +110,7 @@ public class LiteTeleop extends OpMode {
 
         // CLAW
         if (gamepad1.x) {
-            telemetry.addData("Debug: ", "Y-Button Detected");
+            telemetry.addData("Debug: ", "x-Button Detected");
             clawOpen = true;
         }
 
