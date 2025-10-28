@@ -20,19 +20,20 @@ public class MotorTest extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        // Map the motor conn65ected to port 1 (labeled "motor_1" in the Control Hub config)
+        // Map the motor connected to port 1 (labeled "motor_1" in the Control Hub config)
         motor = hardwareMap.get(DcMotor.class, "motor_1");
-        //gamepad1 = hardwareMap.get(Gamepad.class, "controller_1");
-
-        telemetry.addData("Status", "Ready to run motor1");
-        telemetry.update();
-
         //Map servo to port 1 (labled "servo_0" in the Control Hub config)
         Servo = hardwareMap.get(CRServo.class, "servo_0");
 
-        telemetry.addData("Status", "Ready to run serv0" );
+        gamepad1 = hardwareMap.get(Gamepad.class, "controller_1");
+
+        telemetry.addData("Status", "Ready to run motor");
         telemetry.update();
 
+
+
+        telemetry.addData("Status", "Ready to run ");
+        telemetry.update();
         // Wait for the play button on the Driver Station
         waitForStart();
 
@@ -41,13 +42,15 @@ public class MotorTest extends LinearOpMode {
         //telemetry.addData("Motor", "Running");
         //telemetry.update();
 
-        //Servo.setPower(0.1);
-        //telemetry.addData("CRServo", "Running");
-        //telemetry.update();
+        Servo.setPower(0.1);
+        telemetry.addData("CRServo", "Running");
+        telemetry.update();
+
 
         //code for kicker to work
         //make sure to restart/start at 45 percent power
-        Servo.setPower(0.45);
+        kicker.setPosition(0.25);
+
         //move 90 degrees
         Servo.setDirection(DcMotorSimple.Direction.valueOf("90"));
         //set power 65 percent power
