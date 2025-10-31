@@ -5,10 +5,12 @@ import android.net.http.SslCertificate;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
+
+
 
 
 
@@ -16,23 +18,22 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 public class MotorTest extends LinearOpMode {
 
     private DcMotor motor;
-    private CRServo Servo;
+    private Servo kicker;
 
     @Override
     public void runOpMode() {
         // Map the motor connected to port 1 (labeled "motor_1" in the Control Hub config)
         motor = hardwareMap.get(DcMotor.class, "motor_1");
-        //Map servo to port 1 (labled "servo_0" in the Control Hub config)
-        Servo = hardwareMap.get(CRServo.class, "servo_0");
 
-        gamepad1 = hardwareMap.get(Gamepad.class, "controller_1");
+        //Map servo to port 1 (labled "servo_0" in the Control Hub config)
+        kicker = hardwareMap.get(Servo.class, "servo_0");
+
+        //gamepad1 = hardwareMap.get(Gamepad.class, "controller_1");
 
         telemetry.addData("Status", "Ready to run motor");
         telemetry.update();
 
-
-
-        telemetry.addData("Status", "Ready to run ");
+        telemetry.addData("Status", "Ready to run");
         telemetry.update();
         // Wait for the play button on the Driver Station
         waitForStart();
@@ -42,19 +43,23 @@ public class MotorTest extends LinearOpMode {
         //telemetry.addData("Motor", "Running");
         //telemetry.update();
 
+        /*
         Servo.setPower(0.1);
         telemetry.addData("CRServo", "Running");
         telemetry.update();
-
+        */
 
         //code for kicker to work
-        //make sure to restart/start at 45 percent power
-        kicker.setPosition(0.25);
+        //end position
+        kicker.setPosition(1.0);
+        telemetry.addData("Kicker", "Running");
+        telemetry.update();
 
+        /*
         //move 90 degrees
         Servo.setDirection(DcMotorSimple.Direction.valueOf("90"));
         //set power 65 percent power
-        Servo.setPower(0.45);
+        Servo.setPower(0.65);
         //wait 2 sec
         sleep(2000);
 
@@ -62,6 +67,7 @@ public class MotorTest extends LinearOpMode {
         Servo.setDirection(DcMotorSimple.Direction.valueOf("45"));
         //move back 135
         Servo.setDirection(DcMotorSimple.Direction.valueOf("-135"));
+        */
 
         // Do something while code is running
         //like read inputs or degree amounts
@@ -81,8 +87,10 @@ public class MotorTest extends LinearOpMode {
         telemetry.addData("Motor", "Stopped");
         telemetry.update();
 
-        Servo.setPower(0);
+
         telemetry.addData("CRServo", "Stopped");
+        //good starting position
+        kicker.setPosition(0.7);
         telemetry.update();
     }
 }
