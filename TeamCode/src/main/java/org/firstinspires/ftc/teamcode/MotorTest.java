@@ -22,10 +22,14 @@ public class MotorTest extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        // Map the motor connected to port 1 (labeled "motor_1" in the Control Hub config)
+        // Map the motor connected to port 0-3 (labeled "motor_(number)" in the Control Hub config)
+        motor = hardwareMap.get(DcMotor.class, "motor_0");
         motor = hardwareMap.get(DcMotor.class, "motor_1");
+        motor = hardwareMap.get(DcMotor.class, "motor_2");
+        motor = hardwareMap.get(DcMotor.class, "motor_3");
 
-        //Map servo to port 1 (labled "servo_0" in the Control Hub config)
+
+        //Map servo to port 0 (labled "servo_0" in the Control Hub config)
         kicker = hardwareMap.get(Servo.class, "servo_0");
 
         //gamepad1 = hardwareMap.get(Gamepad.class, "controller_1");
@@ -38,10 +42,10 @@ public class MotorTest extends LinearOpMode {
         // Wait for the play button on the Driver Station
         waitForStart();
 
-        // Run motor at 20%
-        //motor.setPower(0.2);
-        //telemetry.addData("Motor", "Running");
-        //telemetry.update();
+         //Run motor at 30%
+        motor.setPower(0.3);
+        telemetry.addData("Motor", "Running");
+        telemetry.update();
 
         /*
         Servo.setPower(0.1);
