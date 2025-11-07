@@ -5,6 +5,7 @@ import android.net.http.SslCertificate;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -17,20 +18,23 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 @TeleOp(name = "Motor Test", group = "Testing")
 public class MotorTest extends LinearOpMode {
 
-    private DcMotor motor;
+    private DcMotor motor0, motor1, motor2, motor3;
     private Servo kicker;
+    private CRServo intakeServoR, intakeServoL;
 
     @Override
     public void runOpMode() {
         // Map the motor connected to port 0-3 (labeled "motor_(number)" in the Control Hub config)
-        motor = hardwareMap.get(DcMotor.class, "motor_0");
-        motor = hardwareMap.get(DcMotor.class, "motor_1");
-        motor = hardwareMap.get(DcMotor.class, "motor_2");
-        motor = hardwareMap.get(DcMotor.class, "motor_3");
+        motor0 = hardwareMap.get(DcMotor.class, "motor_0");
+        motor1 = hardwareMap.get(DcMotor.class, "motor_1");
+        motor2 = hardwareMap.get(DcMotor.class, "motor_2");
+        motor3 = hardwareMap.get(DcMotor.class, "motor_3");
 
 
         //Map servo to port 0 (labled "servo_0" in the Control Hub config)
         kicker = hardwareMap.get(Servo.class, "servo_0");
+        intakeServoR = hardwareMap.get(CRServo.class, "servo_2");
+        intakeServoL = hardwareMap.get(CRServo.class, "servo_5");
 
         //gamepad1 = hardwareMap.get(Gamepad.class, "controller_1");
 
@@ -42,20 +46,26 @@ public class MotorTest extends LinearOpMode {
         // Wait for the play button on the Driver Station
         waitForStart();
 
-         //Run motor at 30%
-        motor.setPower(0.3);
+        //Run all motors at 30%
+        motor0.setPower(0.3);
+        //motor 1 is backwards irl
+        motor1.setPower(-0.3);
+        motor2.setPower(0.3);
+        motor3.setPower(0.3);
         telemetry.addData("Motor", "Running");
         telemetry.update();
 
-        /*
-        Servo.setPower(0.1);
+        //Intake servos power 30%
+        //Intake right is flipped irl
+        intakeServoR.setPower(-0.3);
+        intakeServoL.setPower(0.3);
         telemetry.addData("CRServo", "Running");
         telemetry.update();
-        */
+
 
         //code for kicker to work
         //end position
-        kicker.setPosition(1.0);
+        //kicker.setPosition(1.0);
         telemetry.addData("Kicker", "Running");
         telemetry.update();
 
@@ -86,15 +96,21 @@ public class MotorTest extends LinearOpMode {
 
         }
 
-        // Stop the motor when the opmode ends
-        motor.setPower(0);
+        // Stop all motors when the opmode ends
+        motor0.setPower(0);
+        motor1.setPower(0);
+        motor2.setPower(0);
+        motor3.setPower(0);
         telemetry.addData("Motor", "Stopped");
         telemetry.update();
 
-
         telemetry.addData("CRServo", "Stopped");
         //good starting position
-        kicker.setPosition(0.7);
+        //kicker.setPosition(0.7);
         telemetry.update();
+
+        //stop intake servo
+        intakeServoR.setPower(0);
+        intakeServoL.setPower(0);
     }
 }
