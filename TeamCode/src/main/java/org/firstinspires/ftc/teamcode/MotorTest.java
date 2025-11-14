@@ -57,8 +57,8 @@ public class MotorTest extends LinearOpMode {
 
         //Intake servos power 30%
         //Intake right is flipped irl
-        intakeServoR.setPower(-0.3);
-        intakeServoL.setPower(0.3);
+        intakeServoR.setPower(-1);
+        intakeServoL.setPower(0.45);
         telemetry.addData("CRServo", "Running");
         telemetry.update();
 
@@ -91,6 +91,13 @@ public class MotorTest extends LinearOpMode {
             //double power = -gamepad1.left_stick_y;
             //telemetry.addData("Motor Power", gamepad1.left_stick_y);
             //telemetry.update();
+
+            //Print output RPM and Torque
+            //Right intake servo 0.14 sec per 60 deg at 6 volts (71.43 RPM)
+            //Left intake 0.09 sec per 60 deg at 6 volts (111.11 RPM)
+            telemetry.addData("CRServo", "Stopped");
+            telemetry.update();
+
 
 
 
