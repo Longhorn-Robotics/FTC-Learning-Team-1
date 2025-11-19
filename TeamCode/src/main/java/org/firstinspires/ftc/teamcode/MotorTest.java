@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 
@@ -33,8 +32,8 @@ public class MotorTest extends LinearOpMode {
 
         //Map servo to port 0 (labled "servo_0" in the Control Hub config)
         kicker = hardwareMap.get(Servo.class, "servo_0");
-        intakeServoR = hardwareMap.get(CRServo.class, "servo_2");
-        intakeServoL = hardwareMap.get(CRServo.class, "servo_5");
+        intakeServoR = hardwareMap.get(CRServo.class, "servo_5");
+        intakeServoL = hardwareMap.get(CRServo.class, "servo_2");
 
         //gamepad1 = hardwareMap.get(Gamepad.class, "controller_1");
 
@@ -47,18 +46,18 @@ public class MotorTest extends LinearOpMode {
         waitForStart();
 
         //Run all motors at 30%
-        motor0.setPower(0.3);
+        //motor0.setPower(0.3);
         //motor 1 is backwards irl
-        motor1.setPower(-0.3);
-        motor2.setPower(0.3);
-        motor3.setPower(0.3);
+        //motor1.setPower(-0.3);
+        //motor2.setPower(0.3);
+        //motor3.setPower(0.3);
         telemetry.addData("Motor", "Running");
         telemetry.update();
 
         //Intake servos power 30%
         //Intake right is flipped irl
-        intakeServoR.setPower(-1);
-        intakeServoL.setPower(0.45);
+        intakeServoR.setPower(1.0);
+        intakeServoL.setPower(-0.43);
         telemetry.addData("CRServo", "Running");
         telemetry.update();
 
@@ -86,21 +85,16 @@ public class MotorTest extends LinearOpMode {
         // Do something while code is running
         //like read inputs or degree amounts
         while (opModeIsActive()) {
-            // negative for y makes it work beacuse y is inverted on all controllers for some reason.
-            // i dont know what double power means chat told me to
-            //double power = -gamepad1.left_stick_y;
-            //telemetry.addData("Motor Power", gamepad1.left_stick_y);
-            //telemetry.update();
 
-            //Print output RPM and Torque
-            //Right intake servo 0.14 sec per 60 deg at 6 volts (71.43 RPM)
-            //Left intake 0.09 sec per 60 deg at 6 volts (111.11 RPM)
-            telemetry.addData("CRServo", "Stopped");
+
+            telemetry.addData("gamepad_left_stick_y", gamepad1.left_stick_y);
             telemetry.update();
 
-
-
-
+            //gamepad y is negative because y is inverted on this controller
+            motor0.setPower(-gamepad1.left_stick_y);
+            motor1.setPower(gamepad1.left_stick_y);
+            motor2.setPower(-gamepad1.left_stick_y);
+            motor3.setPower(-gamepad1.left_stick_y);
         }
 
         // Stop all motors when the opmode ends

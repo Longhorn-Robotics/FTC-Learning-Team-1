@@ -1,0 +1,11 @@
+ R2 outtake
+ l2 for intake balls
+
+
+ left and right movement
+
+
+
+ right joystick rotate robot
+ right = clockwise
+ left = counter clockwise
