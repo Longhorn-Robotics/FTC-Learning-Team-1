@@ -56,8 +56,8 @@ public class MotorTest extends LinearOpMode {
 
         //Intake servos power 30%
         //Intake right is flipped irl
-        intakeServoR.setPower(1.0);
-        intakeServoL.setPower(-0.43);
+        //intakeServoR.setPower(1.0);
+        //intakeServoL.setPower(-0.43);
         telemetry.addData("CRServo", "Running");
         telemetry.update();
 
@@ -92,9 +92,25 @@ public class MotorTest extends LinearOpMode {
 
             //gamepad y is negative because y is inverted on this controller
             motor0.setPower(-gamepad1.left_stick_y);
+            //motor 1 is flipped irl
             motor1.setPower(gamepad1.left_stick_y);
             motor2.setPower(-gamepad1.left_stick_y);
             motor3.setPower(-gamepad1.left_stick_y);
+
+
+           // if (gamepad1.left_stick_y > 0.1) {
+
+
+
+            if (gamepad1.left_trigger > 0.1) {
+                intakeServoR.setPower(1.0);
+                //Intake left is flipped irl
+                intakeServoL.setPower(-0.43);
+                telemetry.addData("IntakeServos", "Running");
+            } else {
+                intakeServoR.setPower(0);
+                intakeServoL.setPower(0);
+            }
         }
 
         // Stop all motors when the opmode ends
@@ -104,8 +120,6 @@ public class MotorTest extends LinearOpMode {
         motor3.setPower(0);
         telemetry.addData("Motor", "Stopped");
         telemetry.update();
-
-        telemetry.addData("CRServo", "Stopped");
         //good starting position
         //kicker.setPosition(0.7);
         telemetry.update();
