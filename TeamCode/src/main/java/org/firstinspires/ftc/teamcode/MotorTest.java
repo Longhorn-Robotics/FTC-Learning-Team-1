@@ -90,27 +90,60 @@ public class MotorTest extends LinearOpMode {
             telemetry.addData("gamepad_left_stick_y", gamepad1.left_stick_y);
             telemetry.update();
 
-            //gamepad y is negative because y is inverted on this controller
-            motor0.setPower(-gamepad1.left_stick_y);
+            //forward and backward for motors
+            motor0.setPower(gamepad1.left_stick_y);
             //motor 1 is flipped irl
-            motor1.setPower(gamepad1.left_stick_y);
-            motor2.setPower(-gamepad1.left_stick_y);
-            motor3.setPower(-gamepad1.left_stick_y);
+            motor1.setPower(-gamepad1.left_stick_y);
+            motor2.setPower(gamepad1.left_stick_y);
+            motor3.setPower(gamepad1.left_stick_y);
+
+            //left and right without turning
+            //front left forward
+            motor0.setPower(-gamepad1.left_stick_x);
+            //motor 1 is flipped irl/front right "backward(cuz of flip)"
+            motor1.setPower(gamepad1.left_stick_x);
+            //bottom left back
+            motor2.setPower(gamepad1.left_stick_x);
+            //front right back
+            motor3.setPower(gamepad1.left_stick_x);
 
 
-           // if (gamepad1.left_stick_y > 0.1) {
+
+            //right joystick to rotate robot
+            telemetry.addData("gamepad_right_stick_x", gamepad1.right_stick_x);
+            telemetry.update();
+
+            // Left side (0, 2) must go FORWARD
+            // Right side (3, 1) must go BACKWARD
+            // LFront
+            motor0.setPower(-gamepad1.right_stick_x);
+            //LBack
+            motor2.setPower(-gamepad1.right_stick_x);
+
+            //RFront
+            motor3.setPower(gamepad1.right_stick_x);
+            //RBack
+            //no need for negative because motor 1 is flipped
+            motor1.setPower(-gamepad1.right_stick_x);
 
 
 
+
+
+            //left trigger for intake
             if (gamepad1.left_trigger > 0.1) {
-                intakeServoR.setPower(1.0);
+                intakeServoR.setPower(0.43);
                 //Intake left is flipped irl
-                intakeServoL.setPower(-0.43);
+                intakeServoL.setPower(-1);
                 telemetry.addData("IntakeServos", "Running");
             } else {
+                //make sure to stop when done
                 intakeServoR.setPower(0);
                 intakeServoL.setPower(0);
             }
+
+
+
         }
 
         // Stop all motors when the opmode ends

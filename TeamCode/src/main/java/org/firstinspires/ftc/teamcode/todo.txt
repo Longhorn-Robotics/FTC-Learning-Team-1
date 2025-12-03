@@ -1,11 +1,18 @@
  R2 outtake
- l2 for intake balls
+ lT for intake balls - Done
 
 
- left and right movement
+ left and right movement - Done
+
+ right joystick rotate robot - Done
+ right = clockwise - Done
+ left = counter clockwise - Done
 
 
 
- right joystick rotate robot
- right = clockwise
- left = counter clockwise
+ Notes for motors:
+ (facing intake to outtake)
+ 0 = front left
+ 1 = back right (flipped irl)
+ 2 = back left
+ 3 = front right
