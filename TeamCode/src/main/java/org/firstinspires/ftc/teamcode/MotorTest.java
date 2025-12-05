@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Gamepad;
+
 
 
 
@@ -23,67 +23,30 @@ public class MotorTest extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        // Map the motor connected to port 0-3 (labeled "motor_(number)" in the Control Hub config)
+        //Map the motor connected to port 0-3 (labeled "motor_(number)" in the Control Hub config)
         motor0 = hardwareMap.get(DcMotor.class, "motor_0");
         motor1 = hardwareMap.get(DcMotor.class, "motor_1");
         motor2 = hardwareMap.get(DcMotor.class, "motor_2");
         motor3 = hardwareMap.get(DcMotor.class, "motor_3");
 
 
-        //Map servo to port 0 (labled "servo_0" in the Control Hub config)
+        //Map the servo connected to port X (labeled "servo_(X)" in the Control Hub config)
         kicker = hardwareMap.get(Servo.class, "servo_0");
         intakeServoR = hardwareMap.get(CRServo.class, "servo_5");
         intakeServoL = hardwareMap.get(CRServo.class, "servo_2");
 
-        //gamepad1 = hardwareMap.get(Gamepad.class, "controller_1");
-
-        telemetry.addData("Status", "Ready to run motor");
-        telemetry.update();
-
         telemetry.addData("Status", "Ready to run");
         telemetry.update();
+
         // Wait for the play button on the Driver Station
         waitForStart();
 
-        //Run all motors at 30%
-        //motor0.setPower(0.3);
-        //motor 1 is backwards irl
-        //motor1.setPower(-0.3);
-        //motor2.setPower(0.3);
-        //motor3.setPower(0.3);
-        telemetry.addData("Motor", "Running");
-        telemetry.update();
-
-        //Intake servos power 30%
-        //Intake right is flipped irl
-        //intakeServoR.setPower(1.0);
-        //intakeServoL.setPower(-0.43);
-        telemetry.addData("CRServo", "Running");
-        telemetry.update();
+        //After start, run opmode or sum
 
 
-        //code for kicker to work
-        //end position
-        //kicker.setPosition(1.0);
-        telemetry.addData("Kicker", "Running");
-        telemetry.update();
 
-        /*
-        //move 90 degrees
-        Servo.setDirection(DcMotorSimple.Direction.valueOf("90"));
-        //set power 65 percent power
-        Servo.setPower(0.65);
-        //wait 2 sec
-        sleep(2000);
 
-        //move 45 deg
-        Servo.setDirection(DcMotorSimple.Direction.valueOf("45"));
-        //move back 135
-        Servo.setDirection(DcMotorSimple.Direction.valueOf("-135"));
-        */
-
-        // Do something while code is running
-        //like read inputs or degree amounts
+        //This basicly does something while the robot is running
         while (opModeIsActive()) {
 
 
@@ -141,6 +104,44 @@ public class MotorTest extends LinearOpMode {
                 intakeServoR.setPower(0);
                 intakeServoL.setPower(0);
             }
+
+            //code for kicker
+            if (gamepad1.y){
+                motor0.setPower(gamepad1.left_stick_y);
+                //motor 1 is flipped irl
+                motor1.setPower(-gamepad1.left_stick_y);
+                motor2.setPower(gamepad1.left_stick_y);
+                motor3.setPower(gamepad1.left_stick_y);
+
+                //left and right without turning
+                //front left forward
+                motor0.setPower(-gamepad1.left_stick_x);
+                //motor 1 is flipped irl/front right "backward(cuz of flip)"
+                motor1.setPower(gamepad1.left_stick_x);
+                //bottom left back
+                motor2.setPower(gamepad1.left_stick_x);
+                //front right back
+                motor3.setPower(gamepad1.left_stick_x);
+                /*
+                // Move to Center Position (e.g., 0.5 for 90 degrees)
+                kicker.setPosition(0.5);
+
+                // Wait for 2 seconds (This pauses the whole OpMode)
+                sleep(2000);
+
+                // Move to 45 degree equivalent (e.g., 0.25)
+                kicker.setPosition(0.25);
+
+                // Move back to 135 degree equivalent (e.g., 0.75)
+                // Note: Position values must be 0.0 to 1.0. Use mapping for 135.
+                kicker.setPosition(0.75);
+
+                telemetry.addData("Kicker", "Running");
+                telemetry.update();
+                 */
+
+            }
+
 
 
 

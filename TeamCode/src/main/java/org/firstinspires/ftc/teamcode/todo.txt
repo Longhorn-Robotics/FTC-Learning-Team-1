@@ -1,6 +1,9 @@
  R2 outtake
  lT for intake balls - Done
 
+ kicker y for kicker forward
+ A for kicker backward
+
 
  left and right movement - Done
 
