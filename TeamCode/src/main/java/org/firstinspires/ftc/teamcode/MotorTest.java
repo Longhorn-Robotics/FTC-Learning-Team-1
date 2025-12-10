@@ -18,8 +18,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class MotorTest extends LinearOpMode {
 
     private DcMotor motor0, motor1, motor2, motor3;
-    private Servo kicker;
-    private CRServo intakeServoR, intakeServoL;
+
+    private CRServo intakeServoR, intakeServoL,kicker;
 
     @Override
     public void runOpMode() {
@@ -28,10 +28,12 @@ public class MotorTest extends LinearOpMode {
         motor1 = hardwareMap.get(DcMotor.class, "motor_1");
         motor2 = hardwareMap.get(DcMotor.class, "motor_2");
         motor3 = hardwareMap.get(DcMotor.class, "motor_3");
+        outtakeR Port# = hardwareMap.get(DcMotor.class, "outtakeR_port#");
+        outtakeL Port# = hardwareMap.get(DcMotor.class, "outtakeL_port#");
 
 
         //Map the servo connected to port X (labeled "servo_(X)" in the Control Hub config)
-        kicker = hardwareMap.get(Servo.class, "servo_0");
+        kicker = hardwareMap.get(CRServo.class, "servo_1");
         intakeServoR = hardwareMap.get(CRServo.class, "servo_5");
         intakeServoL = hardwareMap.get(CRServo.class, "servo_2");
 
@@ -105,46 +107,25 @@ public class MotorTest extends LinearOpMode {
                 intakeServoL.setPower(0);
             }
 
-            //code for kicker
-            if (gamepad1.y){
-                motor0.setPower(gamepad1.left_stick_y);
-                //motor 1 is flipped irl
-                motor1.setPower(-gamepad1.left_stick_y);
-                motor2.setPower(gamepad1.left_stick_y);
-                motor3.setPower(gamepad1.left_stick_y);
+            //right trigger for outtake
+            if (gamepad1.right_trigger > 0.1){
+                motorNameR.setPower(1);
+                motorNameR.setPower(1);
 
-                //left and right without turning
-                //front left forward
-                motor0.setPower(-gamepad1.left_stick_x);
-                //motor 1 is flipped irl/front right "backward(cuz of flip)"
-                motor1.setPower(gamepad1.left_stick_x);
-                //bottom left back
-                motor2.setPower(gamepad1.left_stick_x);
-                //front right back
-                motor3.setPower(gamepad1.left_stick_x);
-                /*
-                // Move to Center Position (e.g., 0.5 for 90 degrees)
-                kicker.setPosition(0.5);
-
-                // Wait for 2 seconds (This pauses the whole OpMode)
-                sleep(2000);
-
-                // Move to 45 degree equivalent (e.g., 0.25)
-                kicker.setPosition(0.25);
-
-                // Move back to 135 degree equivalent (e.g., 0.75)
-                // Note: Position values must be 0.0 to 1.0. Use mapping for 135.
-                kicker.setPosition(0.75);
-
-                telemetry.addData("Kicker", "Running");
-                telemetry.update();
-                 */
-
+            }else{
+                motorNameR.setPower(0);
+                motorNameL.setPower(0);
             }
 
-
-
-
+            //code for kicker
+            if (gamepad1.y){
+                //kicker forward
+                kicker.setPower(-1);
+            } else {
+                //kicker (all servos???) has some type of built in code that returns it to
+                //its starting position
+                kicker.setPower(0);
+            }
         }
 
         // Stop all motors when the opmode ends

@@ -1,9 +1,13 @@
- R2 outtake
+
  lT for intake balls - Done
 
- kicker y for kicker forward
- A for kicker backward
+ kicker y for kicker - Done
 
+
+kicker needs to go more angle
+code for outake
+same speed (.75 for now)
+r2 for outake
 
  left and right movement - Done
 
