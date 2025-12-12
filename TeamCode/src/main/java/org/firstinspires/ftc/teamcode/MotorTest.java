@@ -1,12 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
-import android.net.http.SslCertificate;
-
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 
@@ -17,7 +13,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @TeleOp(name = "Motor Test", group = "Testing")
 public class MotorTest extends LinearOpMode {
 
-    private DcMotor motor0, motor1, motor2, motor3;
+    private DcMotor motor0, motor1, motor2, motor3, outtakeR, outtakeL;
 
     private CRServo intakeServoR, intakeServoL,kicker;
 
@@ -28,8 +24,8 @@ public class MotorTest extends LinearOpMode {
         motor1 = hardwareMap.get(DcMotor.class, "motor_1");
         motor2 = hardwareMap.get(DcMotor.class, "motor_2");
         motor3 = hardwareMap.get(DcMotor.class, "motor_3");
-        outtakeR Port# = hardwareMap.get(DcMotor.class, "outtakeR_port#");
-        outtakeL Port# = hardwareMap.get(DcMotor.class, "outtakeL_port#");
+        outtakeR = hardwareMap.get(DcMotor.class, "outtakeR_3");
+        outtakeL = hardwareMap.get(DcMotor.class, "outtakeL_2");
 
 
         //Map the servo connected to port X (labeled "servo_(X)" in the Control Hub config)
@@ -109,12 +105,13 @@ public class MotorTest extends LinearOpMode {
 
             //right trigger for outtake
             if (gamepad1.right_trigger > 0.1){
-                motorNameR.setPower(1);
-                motorNameR.setPower(1);
+                outtakeR.setPower(gamepad1.right_trigger);
+                outtakeL.setPower(gamepad1.right_trigger);
+                telemetry.addData("Outtake", "Running");
 
             }else{
-                motorNameR.setPower(0);
-                motorNameL.setPower(0);
+                outtakeR.setPower(0);
+                outtakeL.setPower(0);
             }
 
             //code for kicker
