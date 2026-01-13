@@ -1,5 +1,8 @@
+//Import offical FTC teamcode package
+//omega9656.github.io/ultimate-goal/org/firstinspires/ftc/teamcode/hardware/package-summary.html
 package org.firstinspires.ftc.teamcode;
 
+//Import functions needed like DcMotor, CRServo, Teleop, and LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -13,8 +16,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @TeleOp(name = "Motor Test", group = "Testing")
 public class MotorTest extends LinearOpMode {
 
+    //Specify names of motors/make function to call them
     private DcMotor motor0, motor1, motor2, motor3, outtakeR, outtakeL;
 
+    //Specify names of servos/make function to call them
     private CRServo intakeServoR, intakeServoL,kicker;
 
     @Override
@@ -39,12 +44,9 @@ public class MotorTest extends LinearOpMode {
         // Wait for the play button on the Driver Station
         waitForStart();
 
-        //After start, run opmode or sum
 
 
-
-
-        //This basicly does something while the robot is running
+        //This does something while the robot is running
         while (opModeIsActive()) {
 
 
@@ -67,7 +69,6 @@ public class MotorTest extends LinearOpMode {
             motor2.setPower(gamepad1.left_stick_x);
             //front right back
             motor3.setPower(gamepad1.left_stick_x);
-
 
 
             //right joystick to rotate robot
@@ -121,9 +122,12 @@ public class MotorTest extends LinearOpMode {
             } else {
                 //kicker (all servos???) has some type of built in code that returns it to
                 //its starting position
+                //ion know honestly, i just know it works.
                 kicker.setPower(0);
             }
         }
+
+        //Opmode ends
 
         // Stop all motors when the opmode ends
         motor0.setPower(0);
@@ -132,11 +136,9 @@ public class MotorTest extends LinearOpMode {
         motor3.setPower(0);
         telemetry.addData("Motor", "Stopped");
         telemetry.update();
-        //good starting position
-        //kicker.setPosition(0.7);
         telemetry.update();
 
-        //stop intake servo
+        //stop intake servos
         intakeServoR.setPower(0);
         intakeServoL.setPower(0);
     }
