@@ -94,7 +94,7 @@ public class MotorTest extends LinearOpMode {
 
             //left trigger for intake
             if (gamepad1.left_trigger > 0.1) {
-                intakeServoR.setPower(0.43);
+                intakeServoR.setPower(1);
                 //Intake left is flipped irl
                 intakeServoL.setPower(-1);
                 telemetry.addData("IntakeServos", "Running");
