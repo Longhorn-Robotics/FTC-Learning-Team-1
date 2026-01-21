@@ -20,7 +20,7 @@ public class MotorTest extends LinearOpMode {
     private DcMotor motor0, motor1, motor2, motor3, outtakeR, outtakeL;
 
     //Specify names of servos/make function to call them
-    private CRServo intakeServoR, intakeServoL,kicker;
+    private CRServo intakeServoR, intakeServoL, kicker, kickerServo;
 
     @Override
     public void runOpMode() {
@@ -37,6 +37,7 @@ public class MotorTest extends LinearOpMode {
         kicker = hardwareMap.get(CRServo.class, "servo_1");
         intakeServoR = hardwareMap.get(CRServo.class, "servo_5");
         intakeServoL = hardwareMap.get(CRServo.class, "servo_2");
+        kickerServo = hardwareMap.get(CRServo.class, "servo_4");
 
         telemetry.addData("Status", "Ready to run");
         telemetry.update();
@@ -58,7 +59,7 @@ public class MotorTest extends LinearOpMode {
             //motor 1 is flipped irl
             motor1.setPower(-gamepad1.left_stick_y);
             motor2.setPower(gamepad1.left_stick_y);
-            motor3.setPower(gamepad1.left_stick_y);
+            motor3.setPower(-gamepad1.left_stick_y);
 
             //left and right without turning
             //front left forward
@@ -68,7 +69,7 @@ public class MotorTest extends LinearOpMode {
             //bottom left back
             motor2.setPower(gamepad1.left_stick_x);
             //front right back
-            motor3.setPower(gamepad1.left_stick_x);
+            motor3.setPower(-gamepad1.left_stick_x);
 
 
             //right joystick to rotate robot
@@ -83,10 +84,10 @@ public class MotorTest extends LinearOpMode {
             motor2.setPower(-gamepad1.right_stick_x);
 
             //RFront
-            motor3.setPower(gamepad1.right_stick_x);
+            motor3.setPower(-gamepad1.right_stick_x);
             //RBack
             //no need for negative because motor 1 is flipped
-            motor1.setPower(-gamepad1.right_stick_x);
+            motor1.setPower(gamepad1.right_stick_x);
 
 
 
@@ -119,11 +120,20 @@ public class MotorTest extends LinearOpMode {
             if (gamepad1.y){
                 //kicker forward
                 kicker.setPower(-1);
+                telemetry.addData("Kicker", "Running");
             } else {
                 //kicker (all servos???) has some type of built in code that returns it to
                 //its starting position
                 //ion know honestly, i just know it works.
                 kicker.setPower(0);
+            }
+
+            //Servo on kicker
+            if (gamepad1.b){
+                kickerServo.setPower(1);
+
+            } else{
+                kickerServo.setPower(0);
             }
         }
 

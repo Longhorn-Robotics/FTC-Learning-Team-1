@@ -1,7 +1,8 @@
 
  lT for intake balls - Done
 
- kicker y for kicker - Done
+Button y for kicker - Done
+Button b for kicker Servo - Done
 
 
 kicker needs to go more angle
