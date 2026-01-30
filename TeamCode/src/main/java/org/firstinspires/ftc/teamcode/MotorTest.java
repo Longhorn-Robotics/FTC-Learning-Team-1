@@ -16,28 +16,24 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @TeleOp(name = "Motor Test", group = "Testing")
 public class MotorTest extends LinearOpMode {
 
-    //Specify names of motors/make function to call them
-    private DcMotor motor0, motor1, motor2, motor3, outtakeR, outtakeL;
-
-    //Specify names of servos/make function to call them
-    private CRServo intakeServoR, intakeServoL, kicker, kickerServo;
-
     @Override
     public void runOpMode() {
         //Map the motor connected to port 0-3 (labeled "motor_(number)" in the Control Hub config)
-        motor0 = hardwareMap.get(DcMotor.class, "motor_0");
-        motor1 = hardwareMap.get(DcMotor.class, "motor_1");
-        motor2 = hardwareMap.get(DcMotor.class, "motor_2");
-        motor3 = hardwareMap.get(DcMotor.class, "motor_3");
-        outtakeR = hardwareMap.get(DcMotor.class, "outtakeR_3");
-        outtakeL = hardwareMap.get(DcMotor.class, "outtakeL_2");
+        //Specify names of motors/make function to call them
+        DcMotor motor0 = hardwareMap.get(DcMotor.class, "motor_0");
+        DcMotor motor1 = hardwareMap.get(DcMotor.class, "motor_1");
+        DcMotor motor2 = hardwareMap.get(DcMotor.class, "motor_2");
+        DcMotor motor3 = hardwareMap.get(DcMotor.class, "motor_3");
+        DcMotor outtakeR = hardwareMap.get(DcMotor.class, "outtakeL_2");
+        DcMotor outtakeL = hardwareMap.get(DcMotor.class, "outtakeL_2");
 
 
         //Map the servo connected to port X (labeled "servo_(X)" in the Control Hub config)
-        kicker = hardwareMap.get(CRServo.class, "servo_1");
-        intakeServoR = hardwareMap.get(CRServo.class, "servo_5");
-        intakeServoL = hardwareMap.get(CRServo.class, "servo_2");
-        kickerServo = hardwareMap.get(CRServo.class, "servo_4");
+        CRServo kicker = hardwareMap.get(CRServo.class, "servo_1");
+        //Specify names of servos/make function to call them
+        CRServo intakeServoR = hardwareMap.get(CRServo.class, "servo_5");
+        CRServo intakeServoL = hardwareMap.get(CRServo.class, "servo_2");
+        CRServo kickerServo = hardwareMap.get(CRServo.class, "servo_4");
 
         telemetry.addData("Status", "Ready to run");
         telemetry.update();
