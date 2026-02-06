@@ -26,10 +26,9 @@ public class MotorTest extends LinearOpMode {
         DcMotor motor3 = hardwareMap.get(DcMotor.class, "motor_3");
         DcMotor outtakeR = hardwareMap.get(DcMotor.class, "outtakeL_2");
         DcMotor outtakeL = hardwareMap.get(DcMotor.class, "outtakeL_2");
-
+        DcMotor kicker = hardwareMap.get(DcMotor.class, "outtakeK");
 
         //Map the servo connected to port X (labeled "servo_(X)" in the Control Hub config)
-        CRServo kicker = hardwareMap.get(CRServo.class, "servo_1");
         //Specify names of servos/make function to call them
         CRServo intakeServoR = hardwareMap.get(CRServo.class, "servo_5");
         CRServo intakeServoL = hardwareMap.get(CRServo.class, "servo_2");
@@ -89,6 +88,7 @@ public class MotorTest extends LinearOpMode {
 
 
 
+
             //left trigger for intake
             if (gamepad1.left_trigger > 0.1) {
                 intakeServoR.setPower(1);
@@ -114,14 +114,15 @@ public class MotorTest extends LinearOpMode {
 
             //code for kicker
             if (gamepad1.y){
-                //kicker forward
-                kicker.setPower(-1);
+                //motor kicker forward
+                kicker.setPower(1);
                 telemetry.addData("Kicker", "Running");
             } else {
-                //kicker (all servos???) has some type of built in code that returns it to
-                //its starting position
-                //ion know honestly, i just know it works.
-                kicker.setPower(0);
+                //motor kicker backwards
+                kicker.setPower(-1);
+                kicker.getCurrentPosition();
+                telemetry.addData("kicker_current_position", kicker.getCurrentPosition());
+                telemetry.update();
             }
 
             //Servo on kicker
